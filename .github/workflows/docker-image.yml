@@ -1,0 +1,43 @@
+name: Time manager
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Checkout du code source
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Étape 2 : Se connecter à Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: "sainseya"
+          password: "dckr_pat_XDXo5ILpbFrGKmU6LklTe9KqaQI"
+
+      # Étape 3 : Construire l'image Docker pour Phoenix
+      - name: Build Phoenix Docker image
+        run: |
+          docker build ./server -t sainseya/phoenix-app:latest
+
+      # Étape 4 : Construire l'image Docker pour Vue.js
+      - name: Build Vue Docker image
+        run: |
+          docker build ./client -t sainseya/vue-app:latest
+
+      # Étape 5 : Pousser l'image Phoenix sur Docker Hub
+      - name: Push Phoenix Docker image
+        run: |
+          docker push sainseya/phoenix-app:latest
+
+      # Étape 6 : Pousser l'image Vue.js sur Docker Hub
+      - name: Push Vue Docker image
+        run: |
+          docker push sainseya/vue-app:latest
