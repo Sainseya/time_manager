@@ -38,7 +38,7 @@ defmodule Time_manager.WorkingTimeController do
   end
 
   def update(conn, %{"id" => id, "working_times" => working_time_params}) do
-  working_time = WorkingTimes.get_working_time_by_id!(id)
+  working_time = WorkingTimes.get_working_time_by_id(id)
 
     case WorkingTimes.update_working_time(working_time, working_time_params) do
       {:ok, _} ->
@@ -53,7 +53,7 @@ defmodule Time_manager.WorkingTimeController do
   end
 
   def delete(conn, %{"id" => id}) do
-    working_time = WorkingTimes.get_working_time_by_id!(id)
+    working_time = WorkingTimes.get_working_time_by_id(id)
     {:ok, _} = WorkingTimes.delete_working_time(working_time)
     json(conn, %{"status" => "success", "message" => "WorkingTime deleted successfully"})
   end

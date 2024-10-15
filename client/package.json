@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
@@ -14,11 +14,19 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/interaction": "^6.1.15",
+    "@fullcalendar/timegrid": "^6.1.15",
+    "@fullcalendar/vue3": "^6.1.15",
+    "autoprefixer": "^10.4.20",
     "chart.js": "^4.4.4",
     "chartjs": "^0.3.24",
     "cors": "^2.8.5",
     "express": "^4.21.1",
-    "vue": "^3.4.29",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "vue": "^3.5.12",
     "vue-chartjs": "^5.3.1",
     "vue-router": "^4.3.3"
   },

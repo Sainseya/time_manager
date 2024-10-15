@@ -4,7 +4,7 @@ import Config
 config :time_manager, Time_manager.Repo,
   username: "postgres",
   password: "postgres",
-  hostname: "localhost",
+  hostname: "db",
   database: "psql",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
@@ -19,15 +19,13 @@ config :time_manager, Time_manager.Repo,
 config :time_manager, Time_managerWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {0, 0, 0, 0}, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "8+24eOC3YmQ7UXw4eQOjpSjqtSCD6l/c5nke4mMFni4Jz9yjPDFcule/e/UVY8WM",
-  watchers: [
-    esbuild: {Esbuild, :install_and_run, [:time_manager, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:time_manager, ~w(--watch)]}
-  ]
+  watchers: []
+
 
 # ## SSL Support
 #

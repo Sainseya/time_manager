@@ -1,4 +1,4 @@
-version: "3"
+version: '3.9'
 
 services:
   frontend:
@@ -23,6 +23,43 @@ services:
       - POSTGRES_DB=psql
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - time_manager_network
+
+  phoenix:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/psql
+    volumes:
+      - ./server:/app
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    command: mix phx.server
+    networks:
+      - time_manager_network
+
+  vue:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - phoenix
+    command: npm run dev
+    networks:
+      - time_manager_network
 
 volumes:
   pgdata:
+
+networks:
+  time_manager_network:
+    driver: bridge

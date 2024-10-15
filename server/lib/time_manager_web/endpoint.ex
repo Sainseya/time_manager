@@ -24,12 +24,13 @@ defmodule Time_managerWeb.Endpoint do
   #
   # You should set gzip to true if you are running phx.digest
   # when deploying your static files in production.
-  plug(Plug.Static,
-    at: "/",
-    from: :time_manager,
-    gzip: false,
-    only: Time_managerWeb.static_paths()
-  )
+
+  # plug(Plug.Static,
+  #   at: "/",
+  #   from: :time_manager,
+  #   gzip: false,
+  #   only: Time_managerWeb.static_paths()
+  # )
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

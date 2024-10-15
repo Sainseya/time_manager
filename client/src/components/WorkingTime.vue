@@ -5,9 +5,9 @@
       <h2>Create Working Time</h2>
       <form @submit.prevent="createWorkingTime">
         <!-- Form fields for creating working time -->
-        <input v-model="workingTimeData.userId" placeholder="User ID" required />
-        <input type="datetime-local" v-model="workingTimeData.start" placeholder="Start Time" required />
-        <input type="datetime-local" v-model="workingTimeData.end" placeholder="End Time" required />
+        <input v-model="this.workingTimeData.userId" placeholder="User ID" required />
+        <input type="datetime-local" v-model="this.workingTimeData.start" placeholder="Start Time" required />
+        <input type="datetime-local" v-model="this.workingTimeData.end" placeholder="End Time" required />
         <button type="submit">Create</button>
       </form>
     </div>
@@ -25,10 +25,19 @@
 </template>
 
 <script>
+import { markRaw } from 'vue';
+
 export default {
+  props: {
+    workingTimeData: {
+      type: Object,
+      required: false,
+    },
+  },
   data() {
+    console.log('WorkingTime Data:', this.workingTimeData.start, this.workingTimeData.end);
     return {
-      workingTimeData: {},
+      workingTimeData: markRaw(this.workingTimeData),
       updateWorkingTimeData: {
         start: '',
         end: ''
@@ -38,6 +47,7 @@ export default {
   },
   methods: {
     async createWorkingTime() {
+      console.log('Creating WorkingTime:', this.workingTimeData);
       try {
         const response = await fetch(`http://localhost:4000/api/workingtime/${this.workingTimeData.userId}`, {
           method: 'POST',

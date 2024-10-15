@@ -1,4 +1,4 @@
-wdefmodule Time_manager.MixProject do
+defmodule Time_manager.MixProject do
   use Mix.Project
 
   def project do
